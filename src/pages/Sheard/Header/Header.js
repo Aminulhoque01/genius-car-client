@@ -4,14 +4,22 @@ import logo from '../../../assets/logo.svg'
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const Header = () => {
    
-    const{user} =useContext(AuthContext);
+    const{user,logOut} =useContext(AuthContext);
+
+    const handelLogOut =()=>{
+        logOut(user)
+    }
+
     const menuItems = <>
 
         <li className='font-semibold'><Link to='/'>Home</Link></li>
         {
             user?.email ?
                 <>
-                 <li className='font-semibold'><Link to='/orders'>orders</Link></li>
+                    <li className='font-semibold'><Link to='/orders'>orders</Link></li>
+                    <li className='font-semibold'>
+                        <button onClick={handelLogOut} className='btn-ghost'>sign out</button>
+                    </li>
                 </>
             :
             <li className='font-semibold'><Link to='/login'>Login</Link></li>
